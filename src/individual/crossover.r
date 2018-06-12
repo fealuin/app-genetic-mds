@@ -1,0 +1,22 @@
+crossOver<-function(I1,I2,ratio,type="random"){
+  n=I1$getNrow()
+  m=I1$getNcol()
+  dataI1=I1$getData()
+  dataI2=I2$getData()
+  if(type=="random"){
+    s=sample(n,size=ratio*n)
+    child1=Individual(n,m)
+    child2=Individual(n,m)
+    child1Data<-dataI1
+    child2Data<-dataI2
+    child1Data[s,]<-dataI2[s,]
+    child2Data[s,]<-dataI1[s,]
+    child1$setData(child1Data)
+    child2$setData(child2Data)
+    return(list(child1,child2))
+  }
+  else{
+    sprintf("Type %s don't exist",type)
+    return(FALSE)
+  }
+}
